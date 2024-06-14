@@ -1,0 +1,105 @@
+   
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url("image.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: rgb(176, 120, 79);
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            width: 100%;
+        }
+        footer .social-icons {
+            margin: 0.5em 0;
+        }
+        footer .social-icons a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+        footer .social-icons a:hover {
+            color: #007bff;
+        }
+        .list-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+        .task-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative; 
+        }
+        .task-card .task-title {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .task-card .task-dates {
+            margin-top: 10px;
+        }
+        .task-card .task-dates span {
+            display: block;
+        }
+        .task-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .task-actions button {
+            margin-left: 5px;
+        }
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .statistics .stat {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            width: 45%;
+            margin-bottom: 10px;
+        }
+        .status-btn {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            width: 80px;
+        }
+
+        .status-btn.en-cours {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .status-btn.terminée {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .status-btn.à-venir {
+            background-color: #17a2b8;
+            color: #fff;
+        }

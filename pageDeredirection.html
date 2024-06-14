@@ -5,113 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="index1.css">
+
     <title>Liste des Tâches</title>
     <style>
-        
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-image: url("image.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-color: rgb(176, 120, 79);
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1em 0;
-            width: 100%;
-        }
-        footer .social-icons {
-            margin: 0.5em 0;
-        }
-        footer .social-icons a {
-            color: #fff;
-            margin: 0 10px;
-            font-size: 1.5em;
-            transition: color 0.3s;
-        }
-        footer .social-icons a:hover {
-            color: #007bff;
-        }
-        .list-section {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin-top: 30px;
-            max-width: 800px;
-            width: 100%;
-        }
-        .task-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative; 
-        }
-        .task-card .task-title {
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        .task-card .task-dates {
-            margin-top: 10px;
-        }
-        .task-card .task-dates span {
-            display: block;
-        }
-        .task-actions {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .task-actions button {
-            margin-left: 5px;
-        }
-        .statistics {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .statistics .stat {
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            text-align: center;
-            width: 45%;
-            margin-bottom: 10px;
-        }
-        .status-btn {
-            font-size: 0.8rem;
-            padding: 5px 10px;
-            border-radius: 20px;
-            width: 80px;
-        }
-
-        .status-btn.en-cours {
-            background-color: #ffc107;
-            color: #212529;
-        }
-
-        .status-btn.terminée {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .status-btn.à-venir {
-            background-color: #17a2b8;
-            color: #fff;
-        }
+     
     </style>
 </head>
 <body>
@@ -135,7 +33,9 @@
                 <p id="upcoming-tasks">0</p>
             </div>
         </div>
-        <div id="task-list"></div>
+        <div id="task-list">
+            
+        </div>
     </section>
 
     <div class="modal fade" id="taskDetailsModal" tabindex="-1" aria-labelledby="taskDetailsModalLabel" aria-hidden="true">
@@ -208,147 +108,7 @@
         </div>
         <p>@DIAL 2024</p>
     </footer>
-    <script>
-        function AfficherTâche() {
-            let taskList = document.getElementById("task-list");
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-            if (tasks.length === 0) {
-                taskList.innerHTML = "<p>Aucune tâche à afficher.</p>";
-                return;
-            }
-
-            taskList.innerHTML = ""; 
-            tasks.forEach(task => {
-                let taskCard = document.createElement("div");
-                taskCard.className = "task-card";
-                let statusBtnClass;
-                switch (getTaskStatus(task)) {
-                    case "En cours":
-                        statusBtnClass = "en-cours";
-                        break;
-                    case "Terminée":
-                        statusBtnClass = "terminée";
-                        break;
-                    case "À venir":
-                        statusBtnClass = "à-venir";
-                        break;
-                    default:
-                        statusBtnClass = "";
-                }
-
-                taskCard.innerHTML = `
-                    <div class="task-card">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <div class="task-title">${task.titre}</div>
-                                <span><strong>Date de début:</strong> ${task.dateDebut}</span>
-                                <span><strong>Date de fin:</strong> ${task.dateFin}</span>
-                            </div>
-                            <div class="task-actions">
-                                <button class="status-btn ${statusBtnClass}">${getTaskStatus(task)}</button>
-                                <button class="btn btn-info btn-sm" onclick="ouvrirModifierTache('${task.titre}')"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-danger btn-sm" onclick="supprimerTache('${task.titre}')"><i class="fas fa-trash"></i></button>
-                                <button class="btn btn-primary btn-sm" onclick="voirDetails('${task.titre}')"><i class="fas fa-eye"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                taskList.appendChild(taskCard);
-            });
-
-            updateTaskStatistics();
-        }
-        function updateTaskStatistics() {
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            let totalTasks = tasks.length;
-            let completedTasks = tasks.filter(task => task.status === "Terminée").length;
-            let ongoingTasks = tasks.filter(task => task.status === "En cours").length;
-            let upcomingTasks = tasks.filter(task => getTaskStatus(task) === "À venir").length;
-        
-            document.getElementById("total-tasks").textContent = totalTasks;
-            document.getElementById("completed-tasks").textContent = completedTasks;
-            document.getElementById("ongoing-tasks").textContent = ongoingTasks;
-            document.getElementById("upcoming-tasks").textContent = upcomingTasks;
-        }
-        
-        
-        function ouvrirModifierTache(titre) {
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            let task = tasks.find(t => t.titre === titre);
-
-            if (task) {
-                document.getElementById("editTaskTitle").value = task.titre;
-                document.getElementById("editTaskDescription").value = task.description;
-                document.getElementById("editTaskStartDate").value = task.dateDebut;
-                document.getElementById("editTaskEndDate").value = task.dateFin;
-                document.getElementById("editTaskStatus").value = task.status;
-                
-                $('#editTaskModal').modal('show');
-
-                document.getElementById("editTaskForm").onsubmit = function(event) {
-                    event.preventDefault();
-                    modifierTache(task);
-                    $('#editTaskModal').modal('hide');
-                };
-            }
-        }
-
-        function modifierTache(task) {
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-            task.titre = document.getElementById("editTaskTitle").value;
-            task.description = document.getElementById("editTaskDescription").value;
-            task.dateDebut = document.getElementById("editTaskStartDate").value;
-            task.dateFin = document.getElementById("editTaskEndDate").value;
-            task.status = document.getElementById("editTaskStatus").value;
-
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            AfficherTâche();
-        }
-
-        function supprimerTache(titre) {
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            tasks = tasks.filter(task => task.titre !== titre);
-
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            AfficherTâche();
-        }
-
-        function voirDetails(titre) {
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            let task = tasks.find(t => t.titre === titre);
-
-            if (task) {
-                document.getElementById("taskDetailsContent").innerText = `
-                    Titre: ${task.titre}
-                    Description: ${task.description}
-                    Date de début: ${task.dateDebut}
-                    Date de fin: ${task.dateFin}
-                    Statut: ${task.status}
-                `;
-
-                $('#taskDetailsModal').modal('show');
-            }
-        }
-        function getTaskStatus(task) {
-            let today = new Date().toISOString().split('T')[0]; 
-            if (task.dateDebut <= today && task.dateFin >= today) {
-                return "En cours";
-            } else if (task.dateFin < today) {
-                return "Terminée";
-            } else {
-                return "À venir";
-            }
-        }
-        
-
-        
-        
-
-        document.addEventListener("DOMContentLoaded", AfficherTâche);
-    </script>
+    <script src="script.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

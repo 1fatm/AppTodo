@@ -1,0 +1,66 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("image.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgb(176, 120, 79);
+    
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    width: 100%;
+}
+footer .social-icons {
+    margin: 0.5em 0;
+}
+footer .social-icons a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.5em;
+    transition: color 0.3s;
+}
+footer .social-icons a:hover {
+    color: #007bff;
+}
+.form-section {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 30px;
+    width: 800px;
+}
+.btn1 {
+    display: flex;
+    align-items: center;
+}
+.btn1 b {
+    margin-left: 5px;
+}
+.note-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.error-message {
+    color: red;
+    font-size: 15px;
+    margin-top: 5px;
+}
