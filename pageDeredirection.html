@@ -14,6 +14,12 @@
 </head>
 <body>
     <section class="list-section my-4 mx-5">
+        <div class="form-group button-group">
+            <button type="button" class="btn btn-primary btn1 mt-3 mb-5 float-right" id="b1">
+                
+                <i class="fas fa-plus" id="ajouter-tache "></i> <b>Ajouter tâche</b>
+            </button>
+        </div>
         <h1 class="h3 mb-3 fw-normal text-center">Liste des Tâches</h1>
         <div class="statistics">
             <div class="stat">
@@ -78,21 +84,13 @@
                         </div>
                         <div class="form-group">
                             <label for="editTaskStartDate">Date de début</label>
-                            <input type="date" class="form-control" id="editTaskStartDate" required>
+                            <input type="date" class="form-control" id="editTaskStartDate"  disabled>
                         </div>
                         <div class="form-group">
                             <label for="editTaskEndDate">Date de fin</label>
-                            <input type="date" class="form-control" id="editTaskEndDate" required>
+                            <input type="date" class="form-control" id="editTaskEndDate" >
                         </div>
-                        <div class="form-group">
-                            <label for="editTaskStatus">Statut</label>
-                            <select class="form-control" id="editTaskStatus" required>
-                                <option value="En cours">En cours</option>
-                                <option value="Terminée">Terminée</option>
-                                <option value="À venir">À venir</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="submit" class="btn btn-primary float-right" id="enregistrer">Enregistrer</button>
                     </form>
                 </div>
             </div>
@@ -109,7 +107,6 @@
         <p>@DIAL 2024</p>
     </footer>
     <script src="script.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
